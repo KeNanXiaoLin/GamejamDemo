@@ -17,5 +17,6 @@ public class Test : MonoBehaviour
         cubeTransform.DOScale(new Vector3(2, 2, 2), 1f);
         cubeTransform.DORotate(new Vector3(0, 90, 90), 1f);
         #endregion
+        Debug.Log("测试");
     }
 }
