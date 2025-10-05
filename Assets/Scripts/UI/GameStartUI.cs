@@ -2,20 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameStartUI : MonoBehaviour
+public class GameStartUI : UIPanelBase
 {
-    public Button btnStart;
-    public Button btnSetting;
-    public Button btnQuit;
+    private Button btnStart;
+    private Button btnSetting;
+    private Button btnQuit;
 
-    void Start()
+    public override void HideMe()
     {
-        btnStart.onClick.AddListener(() =>
+
+    }
+
+    public override void ShowMe()
+    {
+
+    }
+
+    protected override void ClickBtn(string btnName)
+    {
+        switch (btnName)
         {
-            btnStart.transform.DOShakePosition(1, 5);
-        });
+            case "Start":
+                //切换场景到游戏场景
+                UIManager.Instance.HidePanel<GameStartUI>();
+                SceneLoadManager.Instance.LoadScene("GameScene");
+                break;
+            case "Setting":
+                //打开设置面板
+                UIManager.Instance.ShowPanel<SettingPanelUI>();
+                break;
+            case "Quit":
+                Application.Quit();
+                break;
+        }
     }
 
 }
